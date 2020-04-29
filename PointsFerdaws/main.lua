@@ -1,8 +1,9 @@
------------------------------------------------------------------------------------------
---Title: NumericTextFields
+
+--Title: Points
 -- Name: Ferdaws
 -- Course: ICS2O/3C
--- This program asks a question and says if your answer is right or wrog.
+-- This program asks a question and says if your answer is right or wrog
+-- and if you get it right you get a point.
 -----------------------------------------------------------------------------------------
 
 -- hide the status bar 
@@ -23,7 +24,8 @@ local randomNumber2
 local userAnswer 
 local correctAnswer
 local wrongObject
-
+local points = 0
+local pointsText
 ---------------------------------------------------------------------------------------------------------------------------------------
 -- LOCAL FUNCTIONS
 -----------------------------------------------------------------------------------------------------------------------------------------------
@@ -80,6 +82,14 @@ local function HideIncorrect()
   AskQuestion()
 end
 
+if (userAnswer == correctAnswer) then
+	-- give a point if user gets the correct answer 
+	points = points + 1
+
+	-- update it in the display object 
+	pointsText.text = "Points =" .. points  
+end
+
 --------------------------------------------------------------------------------------------------
 -- CREATION
 ---------------------------------------------------------------------------------------------
@@ -106,11 +116,14 @@ numericField.inputType = "number"
 
 -- add the event listener for the numeric field
 numericField:addEventListener( "userInput", NumericFieldListener )
+
+pointsText = display.newText("Points =" .. points, display.contentWidth/3, display.contentHeight/3, nil, 50)
 ------------------------------------------------------------------------------------------------------------------------
 -- FUNCTION CALL
 -----------------------------------------------------------------------------------------------------------------------------------
 -- call the function to ask question
 AskQuestion()
+
 
 
 
